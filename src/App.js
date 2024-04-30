@@ -4,6 +4,7 @@ import RootLayout from "./pages/Root";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
+import Posts from "./pages/Posts";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 
@@ -15,6 +16,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home />, index: true },
       { path: "login", element: <Login /> },
       { path: "profile", element: <Profile /> },
+      { path: "recipes", element: <Posts /> },
     ],
   },
 ]);

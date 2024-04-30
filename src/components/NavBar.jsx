@@ -18,6 +18,7 @@ const NavBar = () => {
         <Link to="/">Home</Link>
         {isAuthenticated ? (
           <>
+          <Link to="/recipes">Recipes</Link>
             <Link to="/profile">Profile</Link>
             <button onClick={logoutHandler}>Log Out</button>{" "}
           </>

@@ -1,9 +1,15 @@
-const RecipeCard = ({recipe}) => {
+import React from 'react';
+import styles from './RecipeCard.module.css'; 
+
+const RecipeCard = ({ recipe }) => {
     return (
-        <div>
-            <h3> {recipe.title} Title </h3>
-            <img src={recipe.imageUrl} alt={recipe.title} />
-            <p> {recipe.description} </p>
+        <div className={styles.recipeCard}>
+            <h2 className={styles.recipeTitle}>{recipe.title}</h2>
+            <p className={styles.recipeDescription}>{recipe.description}</p>
+
+            {recipe.imageUrl && (
+                <img src={recipe.imageUrl} alt={recipe.title} className={styles.recipeImage} />
+            )}
         </div>
     );
 };

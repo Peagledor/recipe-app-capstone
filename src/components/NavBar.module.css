@@ -1,23 +1,13 @@
 .header {
-    max-width: 60rem;
-    margin: auto;
-    padding: 2rem;
-    display: flex;
-    justify-content: center;
-  }
-  
-  .list {
-    display: flex;
-    gap: 1rem;
-  }
-  
-  .list a {
-    text-decoration: none;
-    color: var(--color-primary-400);
-  }
-  
-  .list a:hover,
-  .list a.active {
-    color: var(--color-primary-800);
-    text-decoration: underline;
-  }
+  background-color: #007bff; 
+  padding: 10px 0; 
+}
+
+nav a {
+  color: #fff; 
+  margin-right: 10px; 
+}
+
+nav a:hover {
+  text-decoration: underline; 
+}

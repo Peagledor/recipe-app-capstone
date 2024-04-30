@@ -1,6 +1,8 @@
 import {useEffect, useState} from 'react'
-import RecipeCard from '../components/RecipeCard'
+import Posts from '../pages/Posts'
 import {getRecipes} from '../controllers/recipesController'
+
+
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -16,8 +18,7 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      {recipes.map(recipe => <RecipeCard key={recipe.id} recipe={recipe}/>)}
-
+      <Posts/>
     </div>
   );
 };
