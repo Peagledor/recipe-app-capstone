@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import Posts from '../pages/Posts'
+import Posts from './RecipePosts'
 import {getRecipes} from '../controllers/recipesController'
 
 

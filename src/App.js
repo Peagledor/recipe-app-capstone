@@ -4,9 +4,11 @@ import RootLayout from "./pages/Root";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Posts from "./pages/Posts";
+import Posts from "./pages/RecipePosts";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import AddRecipe from "./pages/AddRecipe";
+import Favorites from "./pages/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +19,8 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "profile", element: <Profile /> },
       { path: "recipes", element: <Posts /> },
+      { path: "add-recipe", element: <AddRecipe /> },
+      { path: "favorites", element: <Favorites /> },
     ],
   },
 ]);

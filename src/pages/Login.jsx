@@ -1,34 +1,44 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { authActions } from "../redux/slices/userSlice";
+// src/pages/Login.jsx
+import React, { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom'; // Use navigate hook
+import { loginUser } from '../controllers/userController'; // Reference this function
+import { authActions } from '../redux/slices/userSlice';
 
 const Login = () => {
-  const [username, setUsername] = useState("");
-  const [password, setPassword] = useState("");
-  const dispatch = useDispatch();
+    const [username, setUsername] = useState('');
+    const [password, setPassword] = useState('');
+    const dispatch = useDispatch();
+    const navigate = useNavigate(); // Use navigate hook
 
-  const loginHandler = () => {
-    dispatch(authActions.login({ username, password }));
-  };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
 
-  return (
-    <div>
-      <h2>Login</h2>
-      <input
-        type="text"
-        placeholder="Username"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={(e) => setPassword(e.target.value)}
-      />
-      <button onClick={loginHandler}>Log In</button>
-    </div>
-  );
+        const credentials = { username, password };
+        const user = await loginUser(credentials, navigate); // Pass navigate
+
+        if (user) {
+            dispatch(authActions.login(user)); // Update Redux store
+            navigate('/'); // Redirect to Home page after login
+        }
+    };
+
+    return (
+        <form onSubmit={handleSubmit}>
+            <h1>Login</h1>
+            <label>
+                Username:
+                <input type="text" value={username} onChange={(e) => setUsername(e.target.value)} />
+            </label>
+
+            <label>
+                Password:
+                <input type="password" value={password} onChange={((e) => setPassword(e.target.value))} />
+            </label>
+
+            <button type="submit">Login</button>
+        </form>
+    );
 };
 
 export default Login;

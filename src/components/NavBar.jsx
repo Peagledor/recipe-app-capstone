@@ -20,6 +20,7 @@ const NavBar = () => {
           <>
           <Link to="/recipes">Recipes</Link>
             <Link to="/profile">Profile</Link>
+            <Link to="/favorites">Favorites</Link>
             <button onClick={logoutHandler}>Log Out</button>{" "}
           </>
         ) : (

@@ -1,9 +1,9 @@
 // src/pages/AddRecipe.jsx
 import React, { useState } from "react";
-import axios from "axios";
 import styles from "./AddRecipe.module.css";
+import { addRecipe } from '../controllers/recipesController'; // Reference add function
 
-const AddRecipe = ({ isOpen, onClose }) => {
+const AddRecipe = ({ isOpen, onClose, userId, navigate }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
@@ -11,22 +11,22 @@ const AddRecipe = ({ isOpen, onClose }) => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const newRecipe = { title, description, imageUrl };
+    const newRecipe = { title, description, imageUrl, userId }; // Include userId
 
     try {
-      const response = await axios.post(
-        "http://localhost:4000/recipes",
-        newRecipe
-      );
-      console.log("Recipe added:", response.data);
+      await addRecipe(newRecipe); // Call add function
+
+      console.log("Recipe added successfully");
+
+      setTitle("");
+      setDescription("");
+      setImageUrl("");
+
+      onClose(); // Close the modal after submission
+      navigate('/recipes'); // Redirect to the recipes page after submission
     } catch (error) {
       console.error("Error adding recipe:", error);
     }
-
-    setTitle("");
-    setDescription("");
-    setImageUrl("");
-    onClose(); // Close the modal after submission
   };
 
   if (!isOpen) return null; // Don't render if modal is not open
@@ -51,7 +51,7 @@ const AddRecipe = ({ isOpen, onClose }) => {
             Description:
             <textarea
               value={description}
-              onChange={(e) => setDescription(e.target.value)}
+              onChange={((e) => setDescription(e.target.value))}
               required
             />
           </label>
@@ -61,7 +61,7 @@ const AddRecipe = ({ isOpen, onClose }) => {
             <input
               type="text"
               value={imageUrl}
-              onChange={(e) => setImageUrl(e.target.value)}
+              onChange={((e) => setImageUrl(e.target.value))}
             />
           </label>
 

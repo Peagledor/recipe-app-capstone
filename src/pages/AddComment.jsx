@@ -18,7 +18,7 @@ const AddComment = ({ recipeId }) => {
         }
 
         setContent('');
-        setIsExpanded(false); // Collapse the form
+        setIsExpanded(false); 
     };
 
     return (
