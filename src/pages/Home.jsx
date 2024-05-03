@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react'
-import Posts from './RecipePosts'
+import RecipePosts from './RecipePosts'
 import {getRecipes} from '../controllers/recipesController'
 
 
@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <h1>Home</h1>
-      <Posts/>
+      <RecipePosts/>
     </div>
   );
 };

@@ -27,36 +27,42 @@ const RecipesPosts = () => {
   };
 
   const handleToggleFavorite = (recipeId) => {
-    setRecipes(recipes.map((recipe) =>
-          recipe.id === recipeId ? { ...recipe, isFavorited: !recipe.isFavorited } : recipe // Toggle favorite status
-      ));
+    setRecipes(
+      recipes.map(
+        (recipe) =>
+          recipe.id === recipeId
+            ? { ...recipe, isFavorited: !recipe.isFavorited }
+            : recipe // Toggle favorite status
+      )
+    );
   };
 
   return (
     <div>
       <h1>Recipes Posts</h1>
-      {recipes.length > 0 ? (
-        recipes.map((recipe) => (
-          <div key={recipe.id}>
-            <RecipeCard
-              recipe={recipe}
-              isFavorited={recipe.isFavorited}
-              onToggleFavorite={() => handleToggleFavorite(recipe.id)}
-              userId={recipe.userId} // Assuming recipe.userId is the intended property
-            />
-            {recipe.comments &&
-              recipe.comments.map((comment) => (
-                <CommentCard
-                  key={comment.id}
-                  comment={comment}
-                  onCommentDeleted={() => handleCommentDeleted(comment.id, recipe.id)}
-                />
-              ))}
-          </div>
-        ))
-      ) : (
-        <p>No recipes found.</p>
-      )}
+
+      {recipes.map((recipe) => (
+          <div>
+          <RecipeCard
+          key={recipe.id}
+            recipe={recipe}
+            isFavorited={recipe.isFavorited}
+            onToggleFavorite={handleToggleFavorite} // Pass toggle handler
+            userId={recipe.userId} // Ensure correct userId
+          />
+
+          {recipe.comments &&
+            recipe.comments.map((comment) => (
+              <CommentCard
+                key={comment.id}
+                comment={comment}
+                onCommentDeleted={(commentId) =>
+                  handleCommentDeleted(commentId, recipe.id)
+                }
+              />
+            ))}
+        </div>
+      ))}
     </div>
   );
 };
