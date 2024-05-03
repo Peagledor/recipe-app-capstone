@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const getFavorites = async (userId) => {
     try {
+        console.log("controller:", userId)
         const response = await axios.get(`http://localhost:4000/favorites/${userId}`); // Fetch user favorites
         return response.data;
     } catch (error) {

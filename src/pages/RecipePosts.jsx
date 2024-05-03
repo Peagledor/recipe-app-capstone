@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import { getRecipes } from "../controllers/recipesController";
 import RecipeCard from "../components/RecipeCard"; // Ensure correct import path
-// import CommentCard from "../components/CommentCard"; // Ensure correct import path
+import CommentCard from "../components/CommentCard"; // Ensure correct import path
 
 const RecipesPosts = () => {
   const [recipes, setRecipes] = useState([]);
@@ -28,36 +28,41 @@ const RecipesPosts = () => {
   };
 
   const handleToggleFavorite = (recipeId) => {
-    setRecipes(recipes.map((recipe) =>
-          recipe.id === recipeId ? { ...recipe, isFavorited: !recipe.isFavorited } : recipe // Toggle favorite status
-      ));
+    setRecipes(
+      recipes.map(
+        (recipe) =>
+          recipe.id === recipeId
+            ? { ...recipe, isFavorited: !recipe.isFavorited }
+            : recipe // Toggle favorite status
+      )
+    );
   };
 
   return (
     <div>
       <h1>Recipes Posts</h1>
 
-      {recipes.map((recipe,) => (
+      {recipes.map((recipe) => (
+          <div>
           <RecipeCard
           key={recipe.id}
             recipe={recipe}
             isFavorited={recipe.isFavorited}
-            onToggleFavorite={handleToggleFavorite}
-            userId={recipe}
+            onToggleFavorite={handleToggleFavorite} // Pass toggle handler
+            userId={recipe.userId} // Ensure correct userId
           />
-          
 
-          // {recipe.comments &&
-            //recipe.comments.map((comment) => (
-              //<CommentCard
-                //key={comment.id}
-                //comment={comment}
-                //onCommentDeleted={(commentId) =>
-                  //handleCommentDeleted(commentId, recipe.id)
-                //}
-              ///>
-           // ))} 
-        
+          {recipe.comments &&
+            recipe.comments.map((comment) => (
+              <CommentCard
+                key={comment.id}
+                comment={comment}
+                onCommentDeleted={(commentId) =>
+                  handleCommentDeleted(commentId, recipe.id)
+                }
+              />
+            ))}
+        </div>
       ))}
     </div>
   );
