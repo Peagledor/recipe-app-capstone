@@ -1,12 +1,11 @@
-// src/components/CommentCard.jsx
 import React from 'react';
 import styles from './CommentCard.module.css';
 import { deleteComment } from '../controllers/commentController';
 
 const CommentCard = ({ comment, onCommentDeleted, userId }) => {
     const deleteCommentHandler = async () => {
-        await deleteComment(comment.id, userId); // Pass userId
-        onCommentDeleted(comment.id); // Notify parent component of deletion
+        await deleteComment(comment.id, userId); 
+        onCommentDeleted(comment.id); 
     };
 
     return (

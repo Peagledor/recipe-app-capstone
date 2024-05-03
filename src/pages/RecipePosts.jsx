@@ -1,4 +1,3 @@
-// src/pages/RecipesPosts.jsx
 import { useEffect, useState } from "react";
 import { getRecipes } from "../controllers/recipesController";
 import RecipeCard from "../components/RecipeCard"; // Ensure correct import path
@@ -41,6 +40,7 @@ const RecipesPosts = () => {
   return (
     <div>
       <h1>Recipes Posts</h1>
+<<<<<<< HEAD
 
       {recipes.map((recipe) => (
           <div>
@@ -64,6 +64,30 @@ const RecipesPosts = () => {
             ))}
         </div>
       ))}
+=======
+      {recipes.length > 0 ? (
+        recipes.map((recipe) => (
+          <div key={recipe.id}>
+            <RecipeCard
+              recipe={recipe}
+              isFavorited={recipe.isFavorited}
+              onToggleFavorite={() => handleToggleFavorite(recipe.id)}
+              userId={recipe.userId} // Assuming recipe.userId is the intended property
+            />
+            {recipe.comments &&
+              recipe.comments.map((comment) => (
+                <CommentCard
+                  key={comment.id}
+                  comment={comment}
+                  onCommentDeleted={() => handleCommentDeleted(comment.id, recipe.id)}
+                />
+              ))}
+          </div>
+        ))
+      ) : (
+        <p>No recipes found.</p>
+      )}
+>>>>>>> temp-branch
     </div>
   );
 };

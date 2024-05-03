@@ -3,6 +3,7 @@ import React from 'react';
 import styles from './RecipeCard.module.css';
 import { toggleFavorite, removeFavorite } from '../controllers/favoritesController'; // Reference necessary functions
 
+
 const RecipeCard = ({ recipe, isFavorited, onToggleFavorite, userId }) => {
     const toggleFavoriteHandler = async () => {
         await toggleFavorite(userId, recipe.id, isFavorited);
