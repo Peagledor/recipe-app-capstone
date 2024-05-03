@@ -1,8 +1,7 @@
-// src/pages/RecipesPosts.jsx
 import { useEffect, useState } from "react";
 import { getRecipes } from "../controllers/recipesController";
 import RecipeCard from "../components/RecipeCard"; // Ensure correct import path
-// import CommentCard from "../components/CommentCard"; // Ensure correct import path
+import CommentCard from "../components/CommentCard"; // Ensure correct import path
 
 const RecipesPosts = () => {
   const [recipes, setRecipes] = useState([]);
@@ -36,29 +35,28 @@ const RecipesPosts = () => {
   return (
     <div>
       <h1>Recipes Posts</h1>
-
-      {recipes.map((recipe,) => (
-          <RecipeCard
-          key={recipe.id}
-            recipe={recipe}
-            isFavorited={recipe.isFavorited}
-            onToggleFavorite={handleToggleFavorite}
-            userId={recipe}
-          />
-          
-
-          // {recipe.comments &&
-            //recipe.comments.map((comment) => (
-              //<CommentCard
-                //key={comment.id}
-                //comment={comment}
-                //onCommentDeleted={(commentId) =>
-                  //handleCommentDeleted(commentId, recipe.id)
-                //}
-              ///>
-           // ))} 
-        
-      ))}
+      {recipes.length > 0 ? (
+        recipes.map((recipe) => (
+          <div key={recipe.id}>
+            <RecipeCard
+              recipe={recipe}
+              isFavorited={recipe.isFavorited}
+              onToggleFavorite={() => handleToggleFavorite(recipe.id)}
+              userId={recipe.userId} // Assuming recipe.userId is the intended property
+            />
+            {recipe.comments &&
+              recipe.comments.map((comment) => (
+                <CommentCard
+                  key={comment.id}
+                  comment={comment}
+                  onCommentDeleted={() => handleCommentDeleted(comment.id, recipe.id)}
+                />
+              ))}
+          </div>
+        ))
+      ) : (
+        <p>No recipes found.</p>
+      )}
     </div>
   );
 };
