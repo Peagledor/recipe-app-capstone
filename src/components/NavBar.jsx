@@ -1,13 +1,19 @@
-// NavBar.jsx
-import React from 'react';
+import { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Modal from './Modal';
+import AddRecipe from '../pages/AddRecipe';
 import { logout } from '../redux/slices/userSlice'; // Make sure the path matches your setup
 import styles from './NavBar.module.css';
 
 const NavBar = () => {
     const isAuthenticated = useSelector(state => state.user.isAuthenticated);
+    const [isAddRecipeOpen, setAddRecipeOpen] = useState(false);
     const dispatch = useDispatch();
+
+    const toggleAddRecipeModal = () => {
+      setAddRecipeOpen(!isAddRecipeOpen);
+  };
 
     const logoutHandler = () => {
         dispatch(logout());
@@ -21,14 +27,17 @@ const NavBar = () => {
                     <>
                         <Link to="/recipes" className={styles.link}>Recipes</Link>
                         <Link to="/profile" className={styles.link}>Profile</Link>
-                        {/* <Link to="/favorites" className={styles.link}>Favorites</Link> */}
-                        <Link to="/add-recipe" className={styles.link}>Post Recipe</Link>
+                        
+                        <button onClick={toggleAddRecipeModal} className={styles.button}>Post Recipe</button>
                         <button onClick={logoutHandler} className={styles.button}>Log Out</button>
                     </>
                 ) : (
                     <Link to="/login" className={styles.link}>Login</Link> 
                 )}
             </nav>
+            <Modal isOpen={isAddRecipeOpen} onClose={toggleAddRecipeModal}>
+                <AddRecipe onRecipeAdded={toggleAddRecipeModal} />
+            </Modal>
         </header>
     );
 };
