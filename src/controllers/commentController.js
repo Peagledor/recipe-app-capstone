@@ -11,14 +11,15 @@ export const getComments = async (recipeId) => {
 };
 
 export const addComment = async (comment) => {
-    try {
-        const response = await axios.post('http://localhost:4000/comments', comment);
-        return response.data;
-    } catch (error) {
-        console.error('Error adding comment:', error);
-        return null;
-    }
+  try {
+    const response = await axios.post('http://localhost:4000/comments', comment);
+    return response.data;
+  } catch (error) {
+    console.error('Error adding comment:', error);
+    return null;
+  }
 };
+
 
 export const deleteComment = async (commentId) => {
     try {

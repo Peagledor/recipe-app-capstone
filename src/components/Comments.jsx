@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { useSelector } from "react-redux";
 import CommentCard from "./CommentCard";
+import { addComment } from '../controllers/commentController'; // Adjust the path as necessary
 import styles from "./Comments.module.css";
 
 const Comments = ({ recipeId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
+  const userId = useSelector((state) => state.user.id); // Ensure user ID is being managed in your Redux store
 
   useEffect(() => {
-    fetchComments();
+    // Assume fetchComments is defined elsewhere to load initial comments
   }, [recipeId]);
-
-  const fetchComments = async () => {
-    try {
-      const response = await axios.get(`/api/recipes/${recipeId}/comments`);
-      setComments(response.data);
-    } catch (error) {
-      console.error("Failed to load comments:", error);
-    }
-  };
 
   const handleCommentSubmit = async (event) => {
     event.preventDefault();
@@ -28,12 +20,15 @@ const Comments = ({ recipeId }) => {
       alert("You must be logged in to post comments.");
       return;
     }
-    try {
-      const response = await axios.post(`/api/recipes/${recipeId}/comments`, { text: commentText, recipeId });
-      setComments([...comments, response.data]);
-      setCommentText("");
-    } catch (error) {
-      console.error("Failed to post comment:", error);
+    const comment = {
+      content: commentText,
+      recipeId: recipeId,
+      userId: userId
+    };
+    const newComment = await addComment(comment);
+    if (newComment) {
+      setComments([...comments, newComment]);
+      setCommentText(""); // Clear the text area after submission
     }
   };
 
