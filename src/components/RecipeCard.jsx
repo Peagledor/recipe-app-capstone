@@ -1,24 +1,67 @@
-import styles from './RecipeCard.module.css'; 
+import React from "react";
+import CommentCard from "./CommentCard";
+import Comments from "./Comments"; // Ensure this is the right component for displaying comments and adding new ones
+import styles from "./RecipeCard.module.css";
 
-const RecipeCard = ({ recipe, onFavoriteToggle, isFavorited }) => {
-    return (
-        <div className={styles.card}>
-            <img src={recipe.imageUrl} alt={recipe.title} className={styles.image} />
-            <div className={styles.details}>
-                <h3 className={styles.title}>{recipe.title}</h3>
-                <p className={styles.description}>{recipe.description}</p>
-                {onFavoriteToggle && (
-                    <button onClick={() => onFavoriteToggle(recipe.id)} className={styles.favoriteButton}>
-                        {isFavorited ? 'Unfavorite' : 'Favorite'}
-                    </button>
-                )}
-            </div>
+const RecipeCard = ({ recipe, onFavoriteToggle, isFavorited, userId }) => {
+  const toggleFavoriteHandler = async () => {
+    onFavoriteToggle(recipe.id, isFavorited);
+  };
+
+  const formatIngredients = (ingredients) => (
+    Object.entries(ingredients).map(([key, value]) => (
+      <li key={key}>{`${key}: ${value}`}</li>
+    ))
+  );
+
+  return (
+    <div className={styles.card}>
+      <img src={recipe.imageUrl} alt={recipe.title} className={styles.image} />
+      <div className={styles.details}>
+        <div className={styles.cardContent}>
+          <h2 className={styles.title}>{recipe.title}</h2>
+          <p className={styles.description}>{recipe.description}</p>
+          <strong>Ingredients:</strong>
+          <ul>{formatIngredients(recipe.ingredients)}</ul>
+          <strong>Instructions:</strong>
+          <p>{recipe.instructions}</p>
+          <strong>Posted on:</strong>
+          <p>{new Date(recipe.createdAt).toLocaleDateString()}</p>
+          <Comments recipeId={recipe.id} />
+          {userId && (
+            <button onClick={toggleFavoriteHandler} className={styles.favoriteButton}>
+              {isFavorited ? 'Favorited' : 'Favorite'}
+            </button>
+          )}
         </div>
-    );
+      </div>
+    </div>
+  );
 };
 
 export default RecipeCard;
 
+
+
+// import styles from './RecipeCard.module.css';
+// const RecipeCard = ({ recipe, onFavoriteToggle, isFavorited }) => {
+//     return (
+//         <div className={styles.card}>
+//             <img src={recipe.imageUrl} alt={recipe.title} className={styles.image} />
+//             <div className={styles.details}>
+//                 <h3 className={styles.title}>{recipe.title}</h3>
+//                 <p className={styles.description}>{recipe.description}</p>
+//                 {onFavoriteToggle && (
+//                     <button onClick={() => onFavoriteToggle(recipe.id)} 
+//                        className={styles.favoriteButton}>
+//                         {isFavorited ? 'Unfavorite' : 'Favorite'}
+//                     </button>
+//                 )}
+//             </div>
+//         </div>
+//     );
+// };
+// export default RecipeCard;
 // import React from "react";
 // import CommentCard from "./CommentCard"; // Ensure you import CommentCard
 // import styles from "./RecipeCard.module.css";
@@ -66,7 +109,6 @@ export default RecipeCard;
 //           {new Date(recipe.createdAt).toLocaleDateString()}
 //         </p>
 //       </div>
-
 //       {recipe.comments && recipe.comments.length > 0 ? (
 //         recipe.comments.map((comment) => (
 //           <CommentCard
@@ -79,7 +121,6 @@ export default RecipeCard;
 //       ) : (
 //         <p>No comments yet.</p>
 //       )}
-
 //       {userId && (
 //         <button onClick={toggleFavoriteHandler}>
 //           {isFavorited ? "Unfavorite" : "Favorite"}

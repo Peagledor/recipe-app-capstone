@@ -3,7 +3,7 @@
   background-color: #ff6347; /* Tomato red for the header */
   padding: 10px 20px;
   display: flex;
-  justify-content: space-between;
+  justify-content: right;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }

@@ -1,25 +1,15 @@
+// CommentCard.jsx
 import React from "react";
-import styles from "./CommentCard.module.css";
-import { deleteComment } from "../controllers/commentController";
+import styles from "./CommentCard.module.css"; // Confirm path and styling
 
-const CommentCard = ({ comment, onCommentDeleted, userId }) => {
-  const deleteCommentHandler = async () => {
-    await deleteComment(comment.id, userId);
-    onCommentDeleted(comment.id);
-  };
-
+const CommentCard = ({ comment }) => {
   return (
     <div className={styles.commentCard}>
-      <h4>Comments:</h4>
-      <p className={styles.commentContent}>{comment.content}</p>
-      <div className={styles.commentMeta}>
-        <span className={styles.commentDate}>
-          Posted at: {new Date(comment.createdAt).toLocaleString()}
-        </span>
+      <p>{comment.text}</p>
+      <div className={styles.commentInfo}>
+        <span>Posted by {comment.author}</span> on{" "}
+        <span>{new Date(comment.created_at).toLocaleDateString()}</span>
       </div>
-      {comment.userId === userId && (
-        <button onClick={deleteCommentHandler}>Delete</button>
-      )}
     </div>
   );
 };
