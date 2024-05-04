@@ -1,21 +1,23 @@
-// RecipeCard.jsx
-import React from 'react';
-import styles from './RecipeCard.module.css'; // Ensure styling is consistent
+import styles from './RecipeCard.module.css'; 
 
-const RecipeCard = ({ recipe }) => {
+const RecipeCard = ({ recipe, onFavoriteToggle, isFavorited }) => {
     return (
         <div className={styles.card}>
             <img src={recipe.imageUrl} alt={recipe.title} className={styles.image} />
             <div className={styles.details}>
                 <h3 className={styles.title}>{recipe.title}</h3>
-                <p className={styles.description}>{recipe.description.substring(0, 100)}...</p>
+                <p className={styles.description}>{recipe.description}</p>
+                {onFavoriteToggle && (
+                    <button onClick={() => onFavoriteToggle(recipe.id)} className={styles.favoriteButton}>
+                        {isFavorited ? 'Unfavorite' : 'Favorite'}
+                    </button>
+                )}
             </div>
         </div>
     );
 };
 
 export default RecipeCard;
-
 
 // import React from "react";
 // import CommentCard from "./CommentCard"; // Ensure you import CommentCard

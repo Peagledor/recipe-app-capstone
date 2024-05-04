@@ -1,0 +1,15 @@
+/* Favorites.module.css */
+.favoritesContainer {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+    padding: 20px;
+}
+
+.noFavorites {
+    color: #ff6347; /* Tomato */
+    font-size: 24px;
+    text-align: center;
+    width: 100%;
+}

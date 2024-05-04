@@ -1,34 +1,75 @@
-import {useSelector} from 'react-redux';
-import { useState, useEffect } from 'react';
-import { getFavorites } from '../controllers/favoritesController';
+// // Favorites.jsx
+// import React, { useEffect, useState } from 'react';
+// import RecipeCard from '../components/RecipeCard';
+// import styles from './Favorites.module.css';
+// import { getFavorites, toggleFavorite } from '../controllers/favoritesController';
 
-import RecipeCard from '../components/RecipeCard'; 
+// const Favorites = () => {
+//     const [favorites, setFavorites] = useState([]);
+
+//     useEffect(() => {
+//         const loadFavorites = async () => {
+//             const favoritesData = await getFavorites();
+//             setFavorites(favoritesData);
+//         };
+//         loadFavorites();
+//     }, []);
+
+//     const handleFavoriteToggle = async (recipeId) => {
+//         await toggleFavorite(recipeId);  // Adjust backend state
+//         setFavorites(favorites.filter(recipe => recipe.id !== recipeId));  // Update local state
+//     };
+
+//     if (favorites.length === 0) {
+//         return <p className={styles.noFavorites}>You have no favorite recipes.</p>;
+//     }
+
+//     return (
+//         <div className={styles.favoritesContainer}>
+//             {favorites.map((recipe) => (
+//                 <RecipeCard
+//                     key={recipe.id}
+//                     recipe={recipe}
+//                     onFavoriteToggle={handleFavoriteToggle}
+//                     isFavorited={true}
+//                 />
+//             ))}
+//         </div>
+//     );
+// };
+
+// export default Favorites;
+
+// Favorites.jsx
+import React, { useEffect, useState } from 'react';
+import RecipeCard from '../components/RecipeCard';
+import { getFavorites, toggleFavorite } from '../controllers/favoritesController';
 
 const Favorites = () => {
-    const userData = useSelector((state) => state.user.userData)
-        const userId = userData?.id
-        console.log(userId)
-
     const [favorites, setFavorites] = useState([]);
 
     useEffect(() => {
-        const fetchFavorites = async () => {
-            if(!userId){
-                console.error("User ID is missing")
-                return;
-            }
-            const data = await getFavorites(userId);
-            setFavorites(data);
+        const loadFavorites = async () => {
+            const favoritesData = await getFavorites();
+            setFavorites(favoritesData);
         };
+        loadFavorites();
+    }, []);
 
-        fetchFavorites();
-    }, [userId]);
+    const handleFavoriteToggle = async (recipeId) => {
+        await toggleFavorite(recipeId);
+        setFavorites(favorites.filter(recipe => recipe.id !== recipeId)); // Remove from view upon unfavorite
+    };
 
     return (
         <div>
-            <h1>Favorites</h1>
-            {favorites.map(favorite => (
-                <RecipeCard key={favorite.recipeId} recipe={favorite.recipe} /> 
+            {favorites.map(recipe => (
+                <RecipeCard
+                    key={recipe.id}
+                    recipe={recipe}
+                    onFavoriteToggle={handleFavoriteToggle}
+                    isFavorited={true} // All recipes here are favorited by default
+                />
             ))}
         </div>
     );
