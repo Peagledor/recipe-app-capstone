@@ -21,7 +21,7 @@ const NavBar = () => {
                     <>
                         <Link to="/recipes" className={styles.link}>Recipes</Link>
                         <Link to="/profile" className={styles.link}>Profile</Link>
-                        <Link to="/favorites" className={styles.link}>Favorites</Link>
+                        {/* <Link to="/favorites" className={styles.link}>Favorites</Link> */}
                         <Link to="/add-recipe" className={styles.link}>Post Recipe</Link>
                         <button onClick={logoutHandler} className={styles.button}>Log Out</button>
                     </>

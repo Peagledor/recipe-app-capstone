@@ -8,11 +8,14 @@ const RecipeCard = ({ recipe, onFavoriteToggle, isFavorited, userId }) => {
     onFavoriteToggle(recipe.id, isFavorited);
   };
 
-  const formatIngredients = (ingredients) => (
-    Object.entries(ingredients).map(([key, value]) => (
+  const formatIngredients = (ingredients) => {
+    // Check if ingredients is null or undefined and return an empty array if true
+    if (!ingredients) return [];
+  
+    return Object.entries(ingredients).map(([key, value]) => (
       <li key={key}>{`${key}: ${value}`}</li>
-    ))
-  );
+    ));
+  };
 
   return (
     <div className={styles.card}>
@@ -28,11 +31,6 @@ const RecipeCard = ({ recipe, onFavoriteToggle, isFavorited, userId }) => {
           <strong>Posted on:</strong>
           <p>{new Date(recipe.createdAt).toLocaleDateString()}</p>
           <Comments recipeId={recipe.id} />
-          {userId && (
-            <button onClick={toggleFavoriteHandler} className={styles.favoriteButton}>
-              {isFavorited ? 'Favorited' : 'Favorite'}
-            </button>
-          )}
         </div>
       </div>
     </div>
