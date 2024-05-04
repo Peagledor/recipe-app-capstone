@@ -2,9 +2,9 @@
 .recipesContainer {
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
-    padding: 20px;
+    justify-content: center;
     gap: 20px;
+    padding: 20px;
 }
 
 .noRecipes {
@@ -13,4 +13,4 @@
     text-align: center;
     width: 100%;
     padding: 50px;
-};
+}

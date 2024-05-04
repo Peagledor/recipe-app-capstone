@@ -1,4 +1,3 @@
-// RecipeDetails.jsx
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from '../controllers/recipesController';
@@ -13,14 +12,14 @@ const RecipeDetails = () => {
     useEffect(() => {
         const fetchRecipe = async () => {
             setIsLoading(true);
-            setError(null);
             try {
                 const fetchedRecipe = await getRecipe(parseInt(recipeId));
                 setRecipe(fetchedRecipe);
+                setIsLoading(false);
             } catch (err) {
                 setError(err.message);
+                setIsLoading(false);
             }
-            setIsLoading(false);
         };
 
         fetchRecipe();
@@ -42,7 +41,7 @@ const RecipeDetails = () => {
                 ))}
             </ul>
             <h3>Instructions</h3>
-            <p>{recipe.instructions}</p>
+            <p className={styles.instructions}>{recipe.instructions}</p>
         </div>
     );
 };

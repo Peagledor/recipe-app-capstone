@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { Provider } from "react-redux";
+import {useState} from 'react'
 import store from "./redux/store";
 
 import RootLayout from "./pages/Root";
@@ -11,6 +12,7 @@ import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import AddRecipe from "./pages/AddRecipe";
 import Favorites from "./pages/Favorites";
+import Modal from './components/Modal'
 
 const router = createBrowserRouter([
   {
@@ -28,13 +30,23 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
+  const [isAddRecipeOpen, setIsAddRecipeOpen] = useState(false)
+
+  const toggleAddRecipeModal = () => {
+    console.log("Toggling Add Recipe Modal: ", !isAddRecipeOpen);
+    setIsAddRecipeOpen(!isAddRecipeOpen);
+};
+
   return (
     <Provider store={store}>
       <RouterProvider router={router}>
-        <div>
-          <NavBar />
+        
+        <NavBar onAddRecipeClick={toggleAddRecipeModal} />
+            <Modal isOpen={isAddRecipeOpen} onClose={() => setIsAddRecipeOpen(false)}>
+                <AddRecipe />
+            </Modal>
           <Footer />
-        </div>
+        
       </RouterProvider>
     </Provider>
   );

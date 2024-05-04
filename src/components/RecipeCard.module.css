@@ -1,34 +1,27 @@
+/* RecipeCard.module.css */
 .card {
-    background-color: #fff5ee; /* seashell */
-    border: 1px solid #ffa07a; /* light salmon */
+    background-color: #fff5ee;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.image {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.details {
+    padding: 15px;
 }
 
 .title {
-    color: #db7093; /* palevioletred */
-    font-size: 24px;
-    margin-bottom: 10px;
+    color: #ff6347;
+    font-size: 18px;
 }
 
 .description {
-    color: #696969; /* dimgray */
-    font-size: 16px;
-    line-height: 1.5;
-}
-
-.button {
-    background-color: #ff6347; /* tomato */
-    color: white;
-    padding: 10px 15px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.button:hover {
-    background-color: #ff4500; /* orange red */
+    color: #555;
+    font-size: 14px;
 }

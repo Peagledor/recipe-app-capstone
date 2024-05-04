@@ -1,13 +1,12 @@
-.header {
-  background-color: #007bff; 
-  padding: 10px 0; 
+.linkButton {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 10px;
 }
 
-nav a {
-  color: #fff; 
-  margin-right: 10px; 
-}
-
-nav a:hover {
-  text-decoration: underline; 
+.linkButton:hover {
+  text-decoration: underline;
 }

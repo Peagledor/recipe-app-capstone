@@ -1,10 +1,9 @@
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { authActions } from "../redux/slices/userSlice";
-
 import classes from "./NavBar.module.css";
 
-const NavBar = () => {
+const NavBar = ({ onAddRecipeClick }) => {
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
   const dispatch = useDispatch();
 
@@ -19,12 +18,11 @@ const NavBar = () => {
         {isAuthenticated ? (
           <>
           <Link to="/recipes">Recipes</Link>
-            <Link to="/profile">Profile</Link>
-            <Link to="/favorites">Favorites</Link>
-            <Link to="/add-recipe">AddRecipe</Link>
-            
+          <Link to="/profile">Profile</Link>
+          <Link to="/favorites">Favorites</Link>
 
-            <button onClick={logoutHandler}>Log Out</button>{" "}
+          <button onClick={onAddRecipeClick} className={classes.linkButton}>Add Recipe</button>
+          <button onClick={logoutHandler}>Log Out</button>
           </>
         ) : (
           <Link to="/login">Login</Link>

@@ -1,3 +1,4 @@
+// RecipePosts.jsx
 import React, { useEffect, useState } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import styles from './RecipePosts.module.css';
