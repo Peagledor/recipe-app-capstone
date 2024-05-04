@@ -1,5 +1,4 @@
-// src/pages/Login.jsx
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom'; // Use navigate hook
 import { loginUser } from '../controllers/userController'; // Reference this function

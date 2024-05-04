@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Allergen', {
+    return sequelize.define('allergen', {
         name: DataTypes.STRING,
     });
 };

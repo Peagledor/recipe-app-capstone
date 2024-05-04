@@ -1,8 +1,6 @@
-import {useEffect, useState} from 'react'
-import RecipePosts from './RecipePosts'
-import {getRecipes} from '../controllers/recipesController'
-
-
+import { useEffect, useState } from 'react';
+import RecipePosts from './RecipePosts';
+import { getRecipes } from '../controllers/recipesController';
 
 const Home = () => {
   const [recipes, setRecipes] = useState([]);
@@ -10,15 +8,15 @@ const Home = () => {
   useEffect(() => {
     const loadRecipes = async () => {
       const recipesData = await getRecipes();
-      setRecipes(recipesData)
+      setRecipes(recipesData);
     };
     loadRecipes();
-  }, [])
+  }, []);
 
   return (
     <div>
       <h1>Home</h1>
-      <RecipePosts/>
+      <RecipePosts recipes={recipes} />
     </div>
   );
 };

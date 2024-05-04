@@ -1,64 +1,53 @@
-import { useEffect, useState } from "react";
-import { getRecipes } from "../controllers/recipesController";
-import RecipeCard from "../components/RecipeCard"; // Ensure correct import path
-import CommentCard from "../components/CommentCard"; // Ensure correct import path
+import React, { useCallback } from 'react';
+import RecipeCard from '../components/RecipeCard';
+import CommentCard from '../components/CommentCard';
 
-const RecipesPosts = () => {
-  const [recipes, setRecipes] = useState([]);
+const RecipePosts = ({ recipes, setRecipes }) => {
+  const handleCommentDeleted = useCallback((commentId, recipeId) => {
+    const updatedRecipes = recipes.map(recipe => {
+      if (recipe.id === recipeId) {
+        return {
+          ...recipe,
+          comments: recipe.comments.filter(comment => comment.id !== commentId)
+        };
+      }
+      return recipe;
+    });
+    setRecipes(updatedRecipes);
+  }, [recipes, setRecipes]);
 
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      const data = await getRecipes();
-      setRecipes(data);
-    };
+  const handleToggleFavorite = useCallback((recipeId) => {
+    const updatedRecipes = recipes.map(recipe => {
+      if (recipe.id === recipeId) {
+        return {
+          ...recipe,
+          isFavorited: !recipe.isFavorited
+        };
+      }
+      return recipe;
+    });
+    setRecipes(updatedRecipes);
+  }, [recipes, setRecipes]);
 
-    fetchRecipes();
-  }, []);
-
-  const handleCommentDeleted = (commentId, recipeId) => {
-    setRecipes((prevRecipes) =>
-      prevRecipes.map((recipe) => {
-        if (recipe.id === recipeId) {
-          recipe.comments = recipe.comments.filter((c) => c.id !== commentId);
-        }
-        return recipe;
-      })
-    );
-  };
-
-  const handleToggleFavorite = (recipeId) => {
-    setRecipes(
-      recipes.map(
-        (recipe) =>
-          recipe.id === recipeId
-            ? { ...recipe, isFavorited: !recipe.isFavorited }
-            : recipe // Toggle favorite status
-      )
-    );
-  };
+  if (!recipes) {
+    return <p>No recipes available.</p>;
+  }
 
   return (
     <div>
-      <h1>Recipes Posts</h1>
-
       {recipes.map((recipe) => (
-          <div>
+        <div key={recipe.id}>
           <RecipeCard
-          key={recipe.id}
             recipe={recipe}
             isFavorited={recipe.isFavorited}
-            onToggleFavorite={handleToggleFavorite} // Pass toggle handler
-            userId={recipe.userId} // Ensure correct userId
+            onToggleFavorite={() => handleToggleFavorite(recipe.id)}
           />
-
           {recipe.comments &&
             recipe.comments.map((comment) => (
               <CommentCard
                 key={comment.id}
                 comment={comment}
-                onCommentDeleted={(commentId) =>
-                  handleCommentDeleted(commentId, recipe.id)
-                }
+                onCommentDeleted={() => handleCommentDeleted(comment.id, recipe.id)}
               />
             ))}
         </div>
@@ -67,4 +56,4 @@ const RecipesPosts = () => {
   );
 };
 
-export default RecipesPosts;
+export default RecipePosts;

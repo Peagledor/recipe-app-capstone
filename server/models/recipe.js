@@ -1,7 +1,23 @@
 module.exports = (sequelize, DataTypes) => {
-    return sequelize.define('Recipe', {
+    const Recipe = sequelize.define('recipe', {
         title: DataTypes.STRING,
         description: DataTypes.TEXT,
-        imageUrl: DataTypes.STRING,
+        imageUrl: {
+            type: DataTypes.STRING,
+            field: 'imageurl'
+        },
+        ingredients: DataTypes.JSON,
+        instructions: DataTypes.TEXT,
+        userId: {
+            type: DataTypes.INTEGER,
+            field: 'userId'
+        }
     });
+
+    Recipe.associate = (models) => {
+        Recipe.hasMany(models.Comment, { as: 'comments' });
+        Recipe.belongsTo(models.User, { foreignKey: 'userId' });
+    };
+
+    return Recipe;
 };

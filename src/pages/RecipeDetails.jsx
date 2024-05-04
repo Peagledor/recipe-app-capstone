@@ -12,7 +12,7 @@ const RecipeDetails = () => {
     const fetchRecipe = async () => {
       setIsLoading(true);
       try {
-        const fetchedRecipe = await getRecipe(recipeId);
+        const fetchedRecipe = await getRecipe(parseInt(recipeId));
         setRecipe(fetchedRecipe);
       } catch (err) {
         setError(err.message);
@@ -30,7 +30,7 @@ const RecipeDetails = () => {
   return (
     <div>
       <h1>{recipe.title}</h1>
-      <img src={recipe.imageUrl} alt={recipe.title} style={{ width: '100%' }} />
+      <img src={recipe.imageUrl} alt={recipe.title} style={{ width: '50%' }} />
       <p>{recipe.description}</p>
       <h3>Ingredients</h3>
       <ul>
