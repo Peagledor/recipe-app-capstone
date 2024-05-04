@@ -1,0 +1,43 @@
+/* Profile.module.css */
+.profileContainer {
+    background-color: #fff5ee;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    text-align: center;
+}
+
+.profileImage {
+    width: 150px;
+    height: 150px;
+    border-radius: 75px;
+    margin-top: 10px;
+}
+
+.editButton, .saveButton {
+    background-color: #ff6347;
+    border: none;
+    padding: 10px 20px;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+}
+
+.editButton:hover, .saveButton:hover {
+    background-color: #ff4500;
+}
+
+.profileForm label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.profileForm input, .profileForm textarea {
+    width: 80%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 2px solid #ffa07a;
+    border-radius: 5px;
+}
