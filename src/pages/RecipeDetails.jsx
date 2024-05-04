@@ -1,13 +1,11 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from '../controllers/recipesController';  
-
 const RecipeDetails = () => {
   const { recipeId } = useParams();
   const [recipe, setRecipe] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
-
   useEffect(() => {
     const fetchRecipe = async () => {
       setIsLoading(true);
@@ -19,14 +17,11 @@ const RecipeDetails = () => {
       }
       setIsLoading(false);
     };
-
     fetchRecipe();
   }, [recipeId]);
-
   if (isLoading) return <p>Loading...</p>;
   if (error) return <p>Error: {error}</p>;
   if (!recipe) return <p>No recipe found!</p>;
-
   return (
     <div>
       <h1>{recipe.title}</h1>

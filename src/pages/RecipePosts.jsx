@@ -1,38 +1,37 @@
-import React, { useCallback } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import RecipeCard from '../components/RecipeCard';
 import CommentCard from '../components/CommentCard';
-
-const RecipePosts = ({ recipes, setRecipes }) => {
+import { getRecipes } from '../controllers/recipesController';
+const RecipePosts = () => {
+  const [recipes, setRecipes] = useState([]);
+  useEffect(() => {
+    const loadRecipes = async () => {
+      const recipesData = await getRecipes();
+      setRecipes(recipesData);
+    };
+    loadRecipes();
+  }, []);
   const handleCommentDeleted = useCallback((commentId, recipeId) => {
-    const updatedRecipes = recipes.map(recipe => {
-      if (recipe.id === recipeId) {
-        return {
-          ...recipe,
-          comments: recipe.comments.filter(comment => comment.id !== commentId)
-        };
-      }
-      return recipe;
-    });
-    setRecipes(updatedRecipes);
-  }, [recipes, setRecipes]);
-
+    setRecipes((prevRecipes) =>
+      prevRecipes.map((recipe) =>
+        recipe.id === recipeId
+          ? { ...recipe, comments: recipe.comments.filter(comment => comment.id !== commentId) }
+          : recipe
+      )
+    );
+  }, []);
   const handleToggleFavorite = useCallback((recipeId) => {
-    const updatedRecipes = recipes.map(recipe => {
-      if (recipe.id === recipeId) {
-        return {
-          ...recipe,
-          isFavorited: !recipe.isFavorited
-        };
-      }
-      return recipe;
-    });
-    setRecipes(updatedRecipes);
-  }, [recipes, setRecipes]);
-
-  if (!recipes) {
+    setRecipes((prevRecipes) =>
+      prevRecipes.map((recipe) =>
+        recipe.id === recipeId
+          ? { ...recipe, isFavorited: !recipe.isFavorited }
+          : recipe
+      )
+    );
+  }, []);
+  if (recipes.length === 0) {
     return <p>No recipes available.</p>;
   }
-
   return (
     <div>
       {recipes.map((recipe) => (

@@ -1,40 +1,75 @@
-
-import React from 'react';
-import styles from './RecipeCard.module.css';
-import { toggleFavorite, removeFavorite } from '../controllers/favoritesController'; // Reference necessary functions
-
-
+import React from "react";
+import CommentCard from "./CommentCard"; // Ensure you import CommentCard
+import styles from "./RecipeCard.module.css";
+import {
+  toggleFavorite,
+  removeFavorite,
+} from "../controllers/favoritesController";
 const RecipeCard = ({ recipe, isFavorited, onToggleFavorite, userId }) => {
-    const toggleFavoriteHandler = async () => {
-        await toggleFavorite(userId, recipe.id, isFavorited);
-        onToggleFavorite(recipe.id)}; 
+  const toggleFavoriteHandler = async () => {
+    await toggleFavorite(userId, recipe.id, isFavorited);
+    onToggleFavorite(recipe.id);
+  };
+  const removeRecipeHandler = async () => {
+    await removeFavorite(recipe.id);
+  };
+  // Function to format ingredients into a list
+  const formatIngredients = (ingredients) => {
+    return Object.entries(ingredients).map(([key, value]) => (
+      <li key={key}>{`${key}: ${value}`}</li>
+    ));
+  };
+  return (
+    <div className={styles.recipeCard}>
+      <h2 className={styles.recipeTitle}>{recipe.title}</h2>
+      <p className={styles.recipeDescription}>{recipe.description}</p>
+      {recipe.imageUrl && (
+        <img
+          src={recipe.imageUrl}
+          alt={recipe.title}
+          className={styles.recipeImage}
+        />
+      )}
+      <div>
+        <strong>Ingredients:</strong>
+        {recipe.ingredients ? (
+          <ul>{formatIngredients(recipe.ingredients)}</ul>
+        ) : (
+          <p>No ingredients listed</p>
+        )}
+        <p>
+          <strong>Instructions:</strong> {recipe.instructions}
+        </p>
+        <p>
+          <strong>Posted on:</strong>{" "}
+          {new Date(recipe.createdAt).toLocaleDateString()}
+        </p>
+      </div>
 
-    const removeRecipeHandler = async () => {
-        await removeFavorite(recipe.id); 
-        
-    };
+      {recipe.comments && recipe.comments.length > 0 ? (
+        recipe.comments.map((comment) => (
+          <CommentCard
+            key={comment.id}
+            comment={comment}
+            onCommentDeleted={() => {}}
+            userId={userId}
+          />
+        ))
+      ) : (
+        <p>No comments yet.</p>
+      )}
 
-    return (
-        <div className={styles.recipeCard}>
-            <h2 className={styles.recipeTitle}>{recipe.title}</h2>
-            <p className={styles.recipeDescription}>{recipe.description}</p>
+      {userId && (
+        <button onClick={toggleFavoriteHandler}>
+          {isFavorited ? "Unfavorite" : "Favorite"}
+        </button>
+      )}
 
-            {recipe.imageUrl && (
-                <img src={recipe.imageUrl} alt={recipe.title} className={styles.recipeImage} />
-            )}
-
-            {userId && (
-                <button onClick={toggleFavoriteHandler}>
-                    {isFavorited ? 'Unfavorite' : 'Favorite'}
-                </button>
-            )}
-
-            {userId === recipe.userId && (
-                <button onClick={removeRecipeHandler}>Delete</button> 
-            )}
-        </div>
-    );
+      {userId === recipe.userId && (
+        <button onClick={removeRecipeHandler}>Delete</button>
+      )}
+    </div>
+  );
 };
-
 
 export default RecipeCard;

@@ -33,8 +33,8 @@ db.users.hasOne(db.profiles);
 db.profiles.belongsTo(db.users);
 
 // many-to-many relationship between recipes and allergens
-db.recipes.belongsToMany(db.allergens, { through: 'Recipe_Allergens' });
-db.allergens.belongsToMany(db.recipes, { through: 'Recipe_Allergens' });
+db.recipes.belongsToMany(db.allergens, { through: 'recipe_allergens' });
+db.allergens.belongsToMany(db.recipes, { through: 'recipe_allergens' });
 
 
 module.exports = db;
