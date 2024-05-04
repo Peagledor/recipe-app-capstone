@@ -1,34 +1,42 @@
 /* Login.module.css */
-.loginForm {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 15px;
+.container {
+    max-width: 400px;
+    margin: auto;
     padding: 20px;
     background-color: #fff5ee;
-    border-radius: 10px;
+    border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
 }
 
-.inputField {
-    width: 80%;
-    padding: 10px;
-    margin: 5px 0;
-    border: 2px solid #ffa07a;
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input[type="text"], input[type="password"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border: 2px solid #ff6347;
+    border-radius: 4px;
+}
+
+button {
+    background-color: #ff6347;
+    color: white;
+    padding: 10px 20px;
+    border: none;
     border-radius: 5px;
+    cursor: pointer;
     font-size: 16px;
 }
 
-.loginButton {
-    padding: 10px 20px;
-    background-color: #ff6347;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+button:hover {
+    background-color: #e55347;
 }
 
-.loginButton:hover {
-    background-color: #ff4500;
+.error {
+    color: #ff6347;
 }

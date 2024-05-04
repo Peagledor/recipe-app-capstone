@@ -36,7 +36,7 @@ const AddRecipe = ({ isOpen, onClose, userId, navigate }) => {
     };
 
     // Early return if modal is not open
-    if (!isOpen) return null;
+    if (isOpen) return null;
 
     // Form for adding a new recipe
     return (
@@ -64,7 +64,7 @@ const AddRecipe = ({ isOpen, onClose, userId, navigate }) => {
                         Instructions:
                         <textarea value={instructions} onChange={e => setInstructions(e.target.value)} required />
                     </label>
-                    <button type="submit" className={styles.button}>Submit Recipe</button>
+                    <button type="submit" className={styles.closeButton}>Submit Recipe</button>
                     <button onClick={onClose} className={styles.closeButton}>Close</button>
                 </form>
             </div>

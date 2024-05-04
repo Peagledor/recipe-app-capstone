@@ -63,12 +63,12 @@ const Favorites = () => {
 
     return (
         <div>
-            {favorites.map(recipe => (
+            {favorites && favorites.map(recipe => (
                 <RecipeCard
                     key={recipe.id}
                     recipe={recipe}
                     onFavoriteToggle={handleFavoriteToggle}
-                    isFavorited={true} // All recipes here are favorited by default
+                    isFavorited={true} 
                 />
             ))}
         </div>
