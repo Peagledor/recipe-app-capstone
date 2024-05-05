@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
-import { addRecipe } from '../controllers/recipesController'; // Adjust this path as needed
+import { addRecipe } from '../controllers/recipesController';
+import { recipeAdded } from '../redux/slices/recipeSlice'; // Assuming you have a recipes slice as discussed
 
 function AddRecipe({ onRecipeAdded }) {
-    const user = useSelector(state => state.user.user);  // Access user information from Redux state
+    const user = useSelector(state => state.user.user);
     const navigate = useNavigate();
-    
+    const dispatch = useDispatch();
+
     const [title, setTitle] = useState('');
     const [description, setDescription] = useState('');
     const [imageUrl, setImageUrl] = useState('');
@@ -14,34 +16,30 @@ function AddRecipe({ onRecipeAdded }) {
     const [instructions, setInstructions] = useState('');
 
     const handleSubmit = async (event) => {
-        event.preventDefault();
-        const newRecipe = {
-            title, 
-            description, 
-            imageUrl, 
-            ingredients, 
-            instructions, 
-            userId: user ? user.id : null  // Use user ID from Redux state, ensure user object has an id property
-        };
-
-        try {
-            await addRecipe(newRecipe);
-            console.log("Recipe added successfully");
-            setTitle('');
-            setDescription('');
-            setImageUrl('');
-            setIngredients('');
-            setInstructions('');
-            onRecipeAdded();
-            navigate('/recipes');
-        } catch (error) {
-            console.error("Error adding recipe:", error);
-        }
-    };
-
-    if (!user) {
-        return <p>Please log in to post recipes.</p>;
-    }
+      event.preventDefault();
+      const newRecipe = {
+          title,
+          description,
+          imageUrl,
+          ingredients: JSON.stringify(ingredients),
+          instructions,
+          userId: user ? user.id : null
+      };
+  
+      try {
+          const recipe = await addRecipe(newRecipe);
+          if (recipe) {
+              console.log("Recipe added successfully", recipe);
+              dispatch(recipeAdded(recipe));
+              onRecipeAdded();
+              navigate('/recipes');
+          } else {
+              throw new Error('Failed to add recipe');
+          }
+      } catch (error) {
+          console.error('Error adding recipe:', error);
+      }
+  };
 
     return (
         <div className="modalContent">
@@ -60,80 +58,3 @@ function AddRecipe({ onRecipeAdded }) {
 }
 
 export default AddRecipe;
-
-
-// import  { useState } from "react";
-// import styles from "./AddRecipe.module.css";
-// import { addRecipe } from '../controllers/recipesController'; // Reference add function
-
-// const AddRecipe = ({ isOpen, onClose, userId, navigate }) => {
-//   const [title, setTitle] = useState("");
-//   const [description, setDescription] = useState("");
-//   const [imageUrl, setImageUrl] = useState("");
-
-//   const handleSubmit = async (event) => {
-//     event.preventDefault();
-
-//     const newRecipe = { title, description, imageUrl, userId }; // Include userId
-//     try {
-//       await addRecipe(newRecipe); // Call add function
-
-//       console.log("Recipe added successfully");
-
-//       setTitle("");
-//       setDescription("");
-//       setImageUrl("");
-
-//       onClose(); // Close the modal after submission
-//       navigate('/recipes'); // Redirect to the recipes page after submission
-//     } catch (error) {
-//       console.error("Error adding recipe:", error);
-//     }
-//   };
-//   if (!isOpen) return null; // Don't render if modal is not open
-//   return (
-//     <div className={styles.modalOverlay}>
-//       <div className={styles.modalContent}>
-//         <h2>Add a Recipe</h2>
-
-//         <form onSubmit={handleSubmit}>
-//           <label>
-//             Title:
-//             <input
-//               type="text"
-//               value={title}
-//               onChange={(e) => setTitle(e.target.value)}
-//               required
-//             />
-//           </label>
-
-//           <label>
-//             Description:
-//             <textarea
-//               value={description}
-//               onChange={((e) => setDescription(e.target.value))}
-//               required
-//             />
-//           </label>
-
-//           <label>
-//             Image URL:
-//             <input
-//               type="text"
-//               value={imageUrl}
-//               onChange={((e) => setImageUrl(e.target.value))}
-//             />
-//           </label>
-
-//           <button type="submit">Submit Recipe</button>
-//         </form>
-
-//         <button onClick={onClose} className={styles.closeButton}>
-//           Close
-//         </button>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default AddRecipe;

@@ -1,7 +1,9 @@
 const Sequelize  = require('sequelize');
 
 // creates sequelize instance
-const sequelize = new Sequelize('postgres://postgres.knayqpquowdfjfiibstk:afcTBXm65&Wm!kc@aws-0-us-west-1.pooler.supabase.com:5432/postgres', {
+const sequelize = new Sequelize(
+    'postgres://postgres.knayqpquowdfjfiibstk:afcTBXm65&Wm!kc@aws-0-us-west-1.pooler.supabase.com:5432/postgres', 
+    {
     dialect: 'postgres',
     dialectOptions: {
         ssl: {

@@ -5,7 +5,9 @@ const db = require('./db/db');
 
 const app = express();
 app.use(bodyParser.json());
-app.use(cors());
+app.use(cors({
+    origin: 'http://localhost:3000' // Allow only the React development server to make requests
+}));
 
 // routes imports
 const recipeRoutes = require('./routes/recipes');
