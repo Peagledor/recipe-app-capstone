@@ -2,16 +2,26 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 import { recipeDeleted } from '../redux/slices/recipeSlice';
 import { deleteRecipe } from '../controllers/recipesController';
+import Comments from './Comments'
+import styles from './RecipeCard.module.css'
+import Styles from './Styles.module.css';
 
 const RecipeCard = ({ recipe }) => {
     const dispatch = useDispatch();
 
+    const formatIngredients = (ingredients) => {
+          if (!ingredients) return [];
+          return Object.entries(ingredients).map(([key, value]) => (
+            <li key={key}>{`${key}: ${value}`}</li>
+          ));
+        };
+
     const handleDelete = async () => {
         try {
             const response = await deleteRecipe(recipe.id);
-            if (response.ok) { // Ensure that your deleteRecipe action is actually checking for a successful HTTP status
+            if (response && response.ok) { 
                 alert('Recipe deleted successfully!');
-                dispatch(recipeDeleted(recipe.id)); // Dispatch the action to update the state
+                dispatch(recipeDeleted(recipe.id));
             } else {
                 const data = await response.json();
                 throw new Error(data.message || 'Failed to delete recipe');
@@ -22,14 +32,21 @@ const RecipeCard = ({ recipe }) => {
     };
 
     return (
-        <div>
-            <img src={recipe.imageUrl} alt={recipe.title} />
-            <h2>{recipe.title}</h2>
-            <p>{recipe.description}</p>
-            <button onClick={handleDelete}>Delete Recipe</button>
+      <div className={`${Styles.card}`}>
+        <img src={recipe.imageUrl} alt={recipe.title} className={styles.img} style={{ width: '100%', objectFit: 'cover' }} />
+        <div className={Styles.commonText}>
+          <h2 className={Styles.commonTitle}>{recipe.title}</h2>
+          <p>{recipe.description}</p>
+          <strong>Ingredients:</strong>
+          <ul>{formatIngredients(recipe.ingredients)}</ul>
+          <strong>Instructions:</strong>
+          <p>{recipe.instructions}</p>
+          <button onClick={handleDelete} className={Styles.deleteButton}>Delete Recipe</button>
+          <Comments/>
         </div>
+      </div>
     );
-};
+  };
 
 export default RecipeCard;
 

@@ -1,10 +1,12 @@
 /* RecipePosts.module.css */
+
 .recipesContainer {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
     padding: 20px;
+    background-color: #f8f8f8;  /* Adds a light background similar to the card's theme */
 }
 
 .noRecipes {
@@ -13,4 +15,5 @@
     text-align: center;
     width: 100%;
     padding: 50px;
+    background-color: #f8f8f8; /* Consistent background */
 }

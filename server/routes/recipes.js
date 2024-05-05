@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db/db");
 
+// get all recipes
 router.get("/", async (req, res) => {
   try {
     const recipes = await db.recipes.findAll({
@@ -24,6 +25,7 @@ router.get("/", async (req, res) => {
   }
 });
 
+// post new recipe
 router.post("/", async (req, res) => {
   const { title, description, imageUrl } = req.body;
 
@@ -35,6 +37,7 @@ router.post("/", async (req, res) => {
   }
 });
 
+// delete recipe
 router.delete('/:id', async (req, res) => {
   try {
       const recipeId = req.params.id;
