@@ -1,17 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import CommentCard from "./CommentCard";
-import { addComment } from '../controllers/commentController'; // Adjust the path as necessary
+import { addComment } from '../controllers/commentController'; 
 import styles from "./Comments.module.css";
 
 const Comments = ({ recipeId }) => {
   const [comments, setComments] = useState([]);
   const [commentText, setCommentText] = useState("");
   const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
-  const userId = useSelector((state) => state.user.id); // Ensure user ID is being managed in your Redux store
+  const userId = useSelector((state) => state.user.id); 
 
   useEffect(() => {
-    // Assume fetchComments is defined elsewhere to load initial comments
+    
   }, [recipeId]);
 
   const handleCommentSubmit = async (event) => {
@@ -28,7 +28,7 @@ const Comments = ({ recipeId }) => {
     const newComment = await addComment(comment);
     if (newComment) {
       setComments([...comments, newComment]);
-      setCommentText(""); // Clear the text area after submission
+      setCommentText(""); 
     }
   };
 
@@ -43,10 +43,13 @@ const Comments = ({ recipeId }) => {
           <textarea
             value={commentText}
             onChange={(e) => setCommentText(e.target.value)}
+            className={styles.textarea}
             placeholder="Type your comment here..."
             required
           />
-          <button type="submit">Post Comment</button>
+          
+          <button type="submit" className={styles.button}>Post Comment</button>
+          
         </form>
       )}
     </div>

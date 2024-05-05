@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipe } from '../controllers/recipesController';
 import styles from './RecipeDetails.module.css';
-import Styles from '../components/Styles.module.css'
 
 const RecipeDetails = () => {
     const { recipeId } = useParams();
@@ -32,9 +31,12 @@ const RecipeDetails = () => {
 
     return (
 
-            <div>
+            <div className={styles.detailsCard}>
             <h1>{recipe.title}</h1>
-            <img src={recipe.imageUrl} alt={recipe.title} className={Styles.img} />
+            <img src={recipe.imageUrl} alt={recipe.title} className={detailsImg} />
+            <div>
+            <div className={styles.detailsContent}>
+
             <p className={styles.description}>{recipe.description}</p>
             <h3>Ingredients</h3>
             <ul className={styles.ingredientsList}>
@@ -44,6 +46,9 @@ const RecipeDetails = () => {
             </ul>
             <h3>Instructions</h3>
             <p className={styles.instructions}>{recipe.instructions}</p>
+            </div>
+            </div>
+                <div/>
         </div>
     );
 };

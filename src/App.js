@@ -40,12 +40,12 @@ function App() {
   return (
     <Provider store={store}>
       <RouterProvider router={router}>
-      <div className="header-title">🍕 My Recipe App</div>
+      <div className={App.header}>🍕 My Recipe App</div>
         <NavBar onAddRecipeClick={toggleAddRecipeModal} />
             <Modal isOpen={isAddRecipeOpen} onClose={() => setIsAddRecipeOpen(false)}>
                 <AddRecipe />
             </Modal>
-          <Footer />
+          
         
       </RouterProvider>
     </Provider>

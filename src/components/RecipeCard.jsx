@@ -36,7 +36,6 @@ const RecipeCard = ({ recipe }) => {
         src={recipe.imageUrl}
         alt={recipe.title}
         className={styles.recipeImg}
-        style={{ width: "100%", objectFit: "cover" }}
       />
       <div className={styles.commonText}>
         <h2 className={styles.commonTitle}>{recipe.title}</h2>

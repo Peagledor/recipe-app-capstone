@@ -1,5 +1,5 @@
 import styles from "./CommentCard.module.css"; 
-import Styles from './Styles.module.css'
+
 
 const CommentCard = ({ comment }) => {
   return (
