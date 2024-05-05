@@ -1,25 +1,14 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getRecipes } from '../../controllers/recipesController'
 
 export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async () => {
     try {
-      const response = await fetch('/recipes');  // Adjust the path as needed
-      if (!response.ok) {
-        throw new Error('Failed to fetch recipes: ' + response.statusText);
-      }
-  
-      const text = await response.text();  // First, read as text to check validity
-      try {
-        const data = JSON.parse(text);  // Then, attempt to parse text as JSON
+        const data = await getRecipes();
         return data;
-      } catch (jsonError) {
-        console.error('JSON parsing error:', text);  // Log the text if JSON parsing fails
-        throw new Error('Failed to parse JSON');
-      }
-    } catch (networkError) {
-      console.error('Network or other error:', networkError);
-      throw networkError;
+    } catch (error) {
+        throw new Error('Failed to fetch recipes: ' + error.message);
     }
-  });
+});
   
 
 const recipesSlice = createSlice({
