@@ -3,9 +3,8 @@ module.exports = (sequelize, DataTypes) => {
         content: DataTypes.TEXT,
     });
 
-    // Assuming you define associations here
     Comment.associate = (models) => {
-        Comment.belongsTo(models.Recipe, { as: 'recipe' });
+        Comment.belongsTo(models.Recipe, { as: 'recipe', foreighKey: 'recipeId', onDelete: 'CASCADE' });
     };
 
     return Comment;

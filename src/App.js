@@ -7,7 +7,7 @@ import RootLayout from "./pages/Root";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
-import Posts from "./pages/RecipePosts";
+import RecipePosts from "./pages/RecipePosts";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
 import AddRecipe from "./pages/AddRecipe";
@@ -22,7 +22,7 @@ const router = createBrowserRouter([
       { path: "/", element: <Home />, index: true },
       { path: "login", element: <Login /> },
       { path: "profile", element: <Profile /> },
-      { path: "recipes", element: <Posts /> },
+      { path: "recipes", element: <RecipePosts /> },
       { path: "add-recipe", element: <AddRecipe /> },
       { path: "favorites", element: <Favorites /> },
     ],

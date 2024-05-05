@@ -15,7 +15,7 @@ module.exports = (sequelize, DataTypes) => {
     });
 
     Recipe.associate = (models) => {
-        Recipe.hasMany(models.Comment, { as: 'comments' });
+        Recipe.hasMany(models.Comment, { as: 'comments', foreighnKey: 'recipeId', onDelete: 'CASCADE' });
         Recipe.belongsTo(models.User, { foreignKey: 'userId' });
     };
 

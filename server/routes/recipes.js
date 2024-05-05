@@ -29,9 +29,24 @@ router.post("/", async (req, res) => {
 
   try {
     const recipe = await db.recipes.create({ title, description, imageUrl });
-    res.status(201).json(recipe);
+    res.status(201).send(recipe);
   } catch (error) {
     res.status(500).json({ error: error.message });
+  }
+});
+
+router.delete('/:id', async (req, res) => {
+  try {
+      const recipeId = req.params.id;
+      const recipe = await db.recipes.findOne({ where: { id: recipeId }});
+      if (!recipe) {
+          return res.status(404).json({ message: 'Recipe not found' });
+      }
+      await recipe.destroy();
+      res.status(200).json({ message: 'Recipe deleted successfully' });
+  } catch (error) {
+      console.error('Error deleting recipe:', error);
+      res.status(500).json({ message: 'Error deleting recipe' });
   }
 });
 
