@@ -1,36 +1,33 @@
-/* NavBar.module.css */
 .header {
-  background-color: #ff6347; /* Tomato red for the header */
+  background-color: #ff6347;
   padding: 10px 20px;
   display: flex;
-  justify-content: right;
+  justify-content: center;
   align-items: center;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.link {
+.title {
+  font-size: 24px;
+  color: white;
+  margin-bottom: 12px;;
+}
+
+.link, .button {
   color: white;
   padding: 8px 16px;
   text-decoration: none;
   font-size: 16px;
-  transition: color 0.3s;
-}
-
-.link:hover, .link:focus {
-  color: #ffd700; /* Gold color on hover/focus for visibility */
-}
-
-.button {
-  padding: 8px 16px;
-  background-color: #ffa500; /* Orange for the button */
-  border: none;
   border-radius: 5px;
-  color: white;
+  margin: 10px 10px;
   cursor: pointer;
-  font-size: 16px;
   transition: background-color 0.3s;
 }
 
-.button:hover, .button:focus {
-  background-color: #ff4500; /* Darker orange on hover/focus */
+.link:hover, .button:hover {
+  background-color: #ff4500;
+}
+
+.link:focus, .button:focus {
+  color: #ffd700; 
 }

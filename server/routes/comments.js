@@ -8,11 +8,7 @@ router.get('/recipes/:recipeId/comments', async (req, res) => {
     try {
         const comments = await db.Comment.findAll({
             where: { recipeId: recipeId },
-<<<<<<< HEAD
             include: [{ model: db.User, attributes: ['username'] }]  
-=======
-            include: [{ model: db.User, attributes: ['username'] }]  // Include the User model
->>>>>>> c54a6879b756f29d2a75a512e6adf11de0c34417
         });
         res.json(comments);
     } catch (error) {
@@ -41,13 +37,5 @@ router.post('/', async (req, res) => {
     }
   });
 
-<<<<<<< HEAD
-=======
-// router.post('/', async (req, res) => {
-//     const { content, recipeId, userId } = req.body;
-//     const comment = await db.comments.create({ content, recipeId, userId });
-//     res.status(201).json(comment);
-// });
->>>>>>> c54a6879b756f29d2a75a512e6adf11de0c34417
 
 module.exports = router;

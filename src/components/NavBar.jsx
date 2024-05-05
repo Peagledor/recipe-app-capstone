@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import Modal from './Modal';
 import AddRecipe from '../pages/AddRecipe';
-import { logout } from '../redux/slices/userSlice'; // Make sure the path matches your setup
+import { logout } from '../redux/slices/userSlice'; 
 import styles from './NavBar.module.css';
 
 const NavBar = () => {
@@ -22,6 +22,9 @@ const NavBar = () => {
     return (
         <header className={styles.header}>
             <nav>
+                <div className={styles.title}>
+                    🍕 Recipe App
+                </div>
                 <Link to="/" className={styles.link}>Home</Link>
                 {isAuthenticated ? (
                     <>

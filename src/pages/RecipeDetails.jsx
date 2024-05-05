@@ -31,8 +31,7 @@ const RecipeDetails = () => {
     if (!recipe) return <p className={styles.notFound}>No recipe found!</p>;
 
     return (
-        // <div className={styles.detailsContainer}>
-            // <div className={Styles.card}>
+
             <div>
             <h1>{recipe.title}</h1>
             <img src={recipe.imageUrl} alt={recipe.title} className={Styles.img} />
