@@ -3,6 +3,7 @@ import React from "react";
 import styles from "./CommentCard.module.css"; 
 import Styles from './Styles.module.css'
 
+// CommentCard.jsx
 const CommentCard = ({ comment }) => {
   return (
     <div className={Styles.card}>
