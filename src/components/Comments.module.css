@@ -1,19 +1,20 @@
 .commentsSection {
-    display: flex;
-    flex-direction: column;
     padding: 60px;
 }
 
 .commentForm {
+    display: flex;
+    flex-direction: column;
     margin-top: 20px;
 }
 
 textarea {
     transition: 100ms;
-    width:80%;
+    width: 95%;
     height: 50px;
     padding: 10px;
     border: 2px solid #ff6347;
     border-radius: 4px;
     margin-bottom: 10px;
 }
+

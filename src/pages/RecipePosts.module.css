@@ -3,6 +3,11 @@ ul {
     padding: 0;
     margin: 0; 
 }
+ol {
+    list-style-type: none; 
+    padding: 0;
+    margin: 0; 
+}
 
 .postCard:hover {
     transform: scale(1.05); 

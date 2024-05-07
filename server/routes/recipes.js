@@ -27,10 +27,10 @@ router.get("/", async (req, res) => {
 
 // post new recipe
 router.post("/", async (req, res) => {
-  const { title, description, imageUrl } = req.body;
+  const { id, title, description, imageUrl, ingredients, instructions, userId, } = req.body;
 
   try {
-    const recipe = await db.recipes.create({ title, description, imageUrl });
+    const recipe = await db.recipes.create({ id,title, description, imageUrl, ingredients, instructions, userId });
     res.status(201).send(recipe);
   } catch (error) {
     res.status(500).json({ error: error.message });

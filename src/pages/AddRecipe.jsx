@@ -10,7 +10,7 @@ function AddRecipe({ onRecipeAdded }) {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [imageUrl, setImageUrl] = useState("");
-  const [ingredients, setIngredients] = useState("");
+  // const [ingredients, setIngredients] = useState(null);
   const [instructions, setInstructions] = useState("");
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -18,7 +18,7 @@ function AddRecipe({ onRecipeAdded }) {
       title,
       description,
       imageUrl,
-      ingredients: JSON.stringify(ingredients),
+      // ingredients: JSON.stringify(ingredients),
       instructions,
       userId: user ? user.id : null,
     };
@@ -50,7 +50,7 @@ function AddRecipe({ onRecipeAdded }) {
           />
         </label>
         <label>
-          Description:{" "}
+          Ingredients:{" "}
           <textarea  value={description}
             onChange={(e) => setDescription(e.target.value)}
             required
@@ -64,14 +64,14 @@ function AddRecipe({ onRecipeAdded }) {
             required
           />
         </label>
-        <label>
+        {/* <label>
           Ingredients:{" "}
           <textarea
             value={ingredients}
             onChange={(e) => setIngredients(e.target.value)}
             required
           />
-        </label>
+        </label> */}
         <label>
           Instructions:{" "}
           <textarea

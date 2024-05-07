@@ -1,13 +1,13 @@
 /* CommonStyles.module.css */
 
 /* .card { */
-    background-color: #fff; /* Light cream background */
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin: 10px auto; /* Centers the card and adds space around */
-    padding: 20px;
-    width: 65%; /* Adjustable based on your preference */
-    max-width: 800px; Ensures the card doesn't get too wide on larger screens
+    /* background-color: #fff; /* Light cream background */
+    /* border-radius: 8px; */
+    /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); */
+    /* margin: 10px auto; Centers the card and adds space around */
+    /* padding: 20px; */
+    /* width: 65%; Adjustable based on your preference */
+    /* max-width: 800px; Ensures the card doesn't get too wide on larger screens */ */
 /* } */
 /* 
 .commonText {
@@ -35,4 +35,4 @@
 
 .commonButton:hover {
     background-color: #e55342;
-} */
+/* } */

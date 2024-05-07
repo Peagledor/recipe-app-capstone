@@ -9,7 +9,6 @@ import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import RecipePosts from "./pages/RecipePosts";
 import NavBar from "./components/NavBar";
-import Footer from "./components/Footer";
 import AddRecipe from "./pages/AddRecipe";
 import Favorites from "./pages/Favorites";
 import Modal from './components/Modal'

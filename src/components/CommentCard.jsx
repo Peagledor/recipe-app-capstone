@@ -1,11 +1,11 @@
-import styles from "./CommentCard.module.css"; 
+import styles from "./RecipeCard.module.css"; 
 
 
 const CommentCard = ({ comment }) => {
   return (
-    <div className={styles.card}>
+    <div>
       <p>{comment.content}</p>
-      <div className={styles.comentInfo} >Posted by {comment.User?.username || 'Anonymous'} on {new Date(comment.createdAt).toLocaleDateString()}</div>
+      <div className={styles.comentInfo} >Posted on {new Date(comment.createdAt).toLocaleDateString()}</div>
     </div>
   );
 };

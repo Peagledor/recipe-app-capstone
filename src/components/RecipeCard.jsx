@@ -39,9 +39,10 @@ const RecipeCard = ({ recipe }) => {
       />
       <div className={styles.commonText}>
         <h2 className={styles.commonTitle}>{recipe.title}</h2>
+        <strong>Ingredients</strong>
         <p>{recipe.description}</p>
-        <strong>Ingredients:</strong>
-        <ul>{formatIngredients(recipe.ingredients)}</ul>
+        {/* <strong>Rating:</strong> */}
+        <p>{formatIngredients(recipe.ingredients)}</p>
         <strong>Instructions:</strong>
         <p>{recipe.instructions}</p>
         <button onClick={handleDelete} className={styles.deleteButton}>

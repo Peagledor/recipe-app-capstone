@@ -1,5 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { getRecipes } from '../../controllers/recipesController'
+import { getRecipes, addRecipe } from '../../controllers/recipesController'
+
+
 
 export const fetchRecipes = createAsyncThunk('recipes/fetchRecipes', async () => {
     try {
